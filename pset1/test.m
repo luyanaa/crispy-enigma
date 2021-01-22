@@ -1,1 +1,0 @@
-load randomwalk.mat
