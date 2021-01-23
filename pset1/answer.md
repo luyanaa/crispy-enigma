@@ -36,27 +36,51 @@
 ## Problem 2
 
 1. Draw the equivalent circuit model for this neuron, labeling intracellular space, extracellular space, membrane capacitance, and membrane resistance.
+
 2. Calculate the total membrane conductance $G_{m}$  and the total membrane
    resistance $R_{m}$ for this modeled neuron.
+   
 3. Calculate the total membrane capacitance $C_{m}$ for this modeled neuron.
 
 4. What is the analytical value of the time constant for this modeled neuron?
 
-5. Complete the provided MATLAB code (file RCpassive.m, check for addtional instructions on code comments) to implement the exponential Euler scheme. Make sure that:
+5. Complete the provided MATLAB code (file `RCpassive.m`, check for addtional instructions on code comments) to implement the exponential Euler scheme. Make sure that:
    - You set the cell’s capacitance, resistance, and resting potential (using the values calculated and defined above).
    - You set the initial condition $V_{0}$ (i.e. $V(t=0)$ ) to $V_{0} = V_{rest}$ and the current injected $I_e$ to $100 pA$ starting at $100ms$ and finishing at $200 ms$ .
    - Your code updates $V(t)$ at every time step using the exponential Euler method.
 
+   See the `RCpassive.m` .
+
 6. Simulate the cell for 1 second using a time-step of 0.1 ms. Plot the voltage as a function of time in one panel and the square current pulse in another.
+
+   See the `RCpassive.m` .
+
 7. From the previous plot estimate the time constant of the cell (Recall that as the voltage changes from $V_{0}$ to steady state, only $\frac{1}{e}$ of the total voltage change is left at time $t = \tau m$ ).
 
+   See the `RCpassive.m`.
+
 8. How does the value obtained in question 7 compares to the value obtained in question 4?
+
 9. Show analytically (manipulate the equations, no MATLAB simulations) that equation 2.2 is indeed a solution to the RC differential equation 2.1.
+
+   $\tau_m\frac{dV}{dt}=-(V_0-V_{rest}-R_mI_e)exp(-\frac{t-t_0}{\tau_m})$
+
 10. Show analytically that equation 2.2 satisfies $V(t_{0})= V_{0}$  .
+
+     $V(t_0)=V_{rest}+R_mI_e+(V_0-V_{rest}-R_mI_e)exp(-\frac{t-t_0}{\tau_m})=V_{rest}+R_mI_e+V_0-V_{rest}-R_mI_e=V_0$
+
 11. Show analytically that for equation 2.2, as $t \to \infty$ , $V(t) → V_{rest} + R_m I_e = V_{\infty}$ also known as the steady state of the system.
+
+    As $t \to \infty$, $\lim_\limits{t\to\infty}V(t)=V_{rest}+R_mI_e$, because $exp(-\frac{t-t_0}{\tau_m}) \to 0$.
+
 12. Suppose the cell is at V_{rest} at at $t=0$, when a current step of $I_e = 500 pA$ is turned on. How long will it take for the cell to reach $-60 mV$ ? What is the steady state voltage for this value of $I_e$ ? Compute these answers analytically.
 
+    - $V(t)=-60mV$ , solve the equation. 
+    - $V_{\infty}=V_{rest}+R_mI_e=-60mV+0.5nA*1M\Omega=-59.5mV$
+
 13. Let’s add an extra channel to our neuron. The extra channel has a resistance $R_{extra}$ and is added in parallel to the other components. Does this new channel make the membrane time constant slower or faster? Show calculations to support your conclusion.
+
+    $R_m$ becomes smaller, thus $\tau_m=R_mC_m$ becomes faster. 
 
 ## Problem 3
 
